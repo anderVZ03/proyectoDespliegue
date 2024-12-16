@@ -2,30 +2,30 @@ CREATE DATABASE licoreriaelchinito;
 USE licoreriaelchinito;
 
 -- Tabla tipoProducto
-CREATE TABLE tipoProducto (
+CREATE TABLE TipoProducto (
     id_tipo_producto INT(11) PRIMARY KEY AUTO_INCREMENT,
     nombreTipo VARCHAR(50) NOT NULL
 );
 
 -- Tabla categoria
-CREATE TABLE categoria (
+CREATE TABLE Categoria (
     id_categoria INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_tipo_producto INT(11),
     nombreCategoria VARCHAR(50) NOT NULL,
     tipo VARCHAR(255),
-    FOREIGN KEY (id_tipo_producto) REFERENCES tipoProducto (id_tipo_producto)
+    FOREIGN KEY (id_tipo_producto) REFERENCES TipoProducto (id_tipo_producto)
 );
 
 -- Tabla marca
-CREATE TABLE marca (
+CREATE TABLE Marca (
     id_marca INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_categoria INT(11),
     nombreMarca VARCHAR(50) NOT NULL,
-    FOREIGN KEY (id_categoria) REFERENCES categoria (id_categoria)
+    FOREIGN KEY (id_categoria) REFERENCES Categoria (id_categoria)
 );
 
 -- Tabla producto
-CREATE TABLE producto (
+CREATE TABLE Producto (
     id_producto INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_marca INT(11),
     nombreProducto VARCHAR(100) NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE producto (
     presentacion_ml INT(11),
     id_categoria INT(11),
     imagen VARCHAR(120),
-    FOREIGN KEY (id_marca) REFERENCES marca (id_marca),
-    FOREIGN KEY (id_categoria) REFERENCES categoria (id_categoria)
+    FOREIGN KEY (id_marca) REFERENCES Marca (id_marca),
+    FOREIGN KEY (id_categoria) REFERENCES Categoria (id_categoria)
 );
 
 -- Tabla factura
-CREATE TABLE factura (
+CREATE TABLE Factura (
     id_factura INT(11) PRIMARY KEY AUTO_INCREMENT,
     fecha DATE,
     total DECIMAL(10,2),
@@ -47,23 +47,23 @@ CREATE TABLE factura (
 );
 
 -- Tabla detalleFactura
-CREATE TABLE detalleFactura (
+CREATE TABLE DetalleFactura (
     id_detalle_factura INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_factura INT(11),
     id_producto INT(11),
     cantidad INT(11),
     precioUnitario DECIMAL(10,2),
-    FOREIGN KEY (id_factura) REFERENCES factura (id_factura),
-    FOREIGN KEY (id_producto) REFERENCES producto (id_producto)
+    FOREIGN KEY (id_factura) REFERENCES Factura (id_factura),
+    FOREIGN KEY (id_producto) REFERENCES Producto (id_producto)
 );
 
 -- Inserción en tabla tipoProducto
-INSERT INTO tipoProducto (id_tipo_producto, nombreTipo) VALUES
+INSERT INTO TipoProducto (id_tipo_producto, nombreTipo) VALUES
 (1, 'Confiteria'),
 (2, 'Licores');
 
 -- Inserción en tabla categoria
-INSERT INTO categoria (id_categoria, id_tipo_producto, nombreCategoria, tipo) VALUES
+INSERT INTO Categoria (id_categoria, id_tipo_producto, nombreCategoria, tipo) VALUES
 (1, 2, 'Whiskey', 'licores'),
 (2, 2, 'Vodka', 'licores'),
 (3, 2, 'Tequila', 'licores'),
@@ -73,7 +73,7 @@ INSERT INTO categoria (id_categoria, id_tipo_producto, nombreCategoria, tipo) VA
 (7, 2, 'Cerveza', 'licores');
 
 -- Inserción en tabla marca
-INSERT INTO marca (id_marca, id_categoria, nombreMarca) VALUES
+INSERT INTO Marca (id_marca, id_categoria, nombreMarca) VALUES
 (1, 1, 'Jack Daniels'),
 (2, 1, 'Johnnie Walker'),
 (3, 2, 'Smirnoff'),
@@ -105,7 +105,7 @@ INSERT INTO marca (id_marca, id_categoria, nombreMarca) VALUES
 (29, 3, 'Don Julio');
 
 -- Inserción en tabla producto
-INSERT INTO producto (id_producto, id_marca, nombreProducto, cantidad, precio, presentacion_ml, id_categoria, imagen) VALUES
+INSERT INTO Producto (id_producto, id_marca, nombreProducto, cantidad, precio, presentacion_ml, id_categoria, imagen) VALUES
 (1, 1, 'Jack Daniels', 50, 45.99, 700, 1, 'JackDaniels.jpg'),
 (2, 2, 'Johnnie Walker Black', 40, 55.50, 750, 1, 'JohnnieWalkerBlack.jpg'),
 (3, 3, 'Smirnoff Vodka', 30, 25.99, 700, 2, 'SmirnoffVodka.jpg'),

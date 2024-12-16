@@ -18,7 +18,7 @@ const getCategoriaNombre = (req, res) => {
 // Obtener categoria y cantidad de cada una 
 const getCategoriaCantidad = (req, res) => {
     // ejecuatr consulta en la bd ejerciciendo consulta
-    db.query(' SELECT c.nombreCategoria AS Categoria, COUNT(p.id_producto) AS TotalProductos FROM producto p INNER JOIN  categoria c ON p.id_categoria = c.id_categoria GROUP BY  c.nombreCategoria ORDER BY TotalProductos DESC;', (err, results)=>{
+    db.query(' SELECT c.nombreCategoria AS Categoria, COUNT(p.id_producto) AS TotalProductos FROM Producto p INNER JOIN  Categoria c ON p.id_categoria = c.id_categoria GROUP BY  c.nombreCategoria ORDER BY TotalProductos DESC;', (err, results)=>{
         if(err){
         
             // manejo de error 500--> Error Interno del servidor 

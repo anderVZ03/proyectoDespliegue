@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
     // Aplicar filtros si están presentes
     if (marca) {
-        sql += ' AND marca = ?';
+        sql += ' AND id_marca = ?';
         params.push(marca);
     }
     if (categoria) {
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
         params.push(categoria);
     }
     if (presentacion) {
-        sql += ' AND presentacion = ?';
+        sql += ' AND presentacion_ml = ?';
         params.push(presentacion);
     }
 
