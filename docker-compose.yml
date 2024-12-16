@@ -1,0 +1,42 @@
+services:
+  database:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_USER: proyecto
+      MYSQL_PASSWORD: proyecto
+      MYSQL_ROOT_PASSWORD: proyecto
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mired
+
+  backend:
+    build:
+      context: ./licoreris-api
+    container_name: backend
+    command: npm start
+    env_file:
+      - ./licoreris-api/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    networks:
+      - mired
+
+  frontend:
+    build:
+      context: ./Licoreria
+    container_name: frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    networks:
+      - mired
+networks:
+  mired:
